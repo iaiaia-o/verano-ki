@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VERANO KI · Ligera, esbelta y radiante</title>
+
+  <style>
+    :root {
+      --ivory: #F7F1E8;
+      --ivory-soft: #FBF7F1;
+      --rose: #C9827A;
+      --rose-soft: #E8C8C2;
+      --rose-light: #F3DED9;
+      --gold: #C6A05A;
+      --gold-soft: #E5D4AD;
+      --charcoal: #2F3134;
+      --gray: #6E6A66;
+      --white: #FFFFFF;
+      --shadow: rgba(47, 49, 52, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--ivory-soft);
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.15;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      padding: 18px 0;
+      background: rgba(251, 247, 241, 0.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(198, 160, 90, 0.18);
+    }
+
+    .top-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      color: var(--charcoal);
+    }
+
+    .nav-cta {
+      background: var(--charcoal);
+      color: var(--white);
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      transition: all 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--rose);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      position: relative;
+      padding: 82px 0 70px;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(198,160,90,0.25), transparent 28%),
+        radial-gradient(circle at 5% 85%, rgba(201,130,122,0.22), transparent 35%),
+        var(--ivory-soft);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 58px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .hero .hook {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: var(--rose);
+      line-height: 1.12;
+      margin-bottom: 22px;
+    }
+
+    .hero .subtitle {
+      font-size: 1.22rem;
+      color: var(--gray);
+      max-width: 650px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--rose);
+      color: var(--white);
+      padding: 15px 26px;
+      border-radius: 999px;
+      font-weight: 650;
+      box-shadow: 0 12px 30px rgba(201, 130, 122, 0.28);
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      background: #B86F68;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      color: var(--charcoal);
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(198, 160, 90, 0.45);
+      background: rgba(255,255,255,0.42);
+      transition: all 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--charcoal);
+      background: rgba(243, 222, 217, 0.8);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+    }
+
+    .availability span {
+      width: 9px;
+      height: 9px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(198, 160, 90, 0.22);
+      border-radius: 30px;
+      padding: 16px;
+      box-shadow: 0 24px 80px var(--shadow);
+    }
+
+    .hero-card img {
+      width: 100%;
+      display: block;
+      border-radius: 22px;
+    }
+
+    .section {
+      padding: 82px 0;
+    }
+
+    .section.alt {
+      background: var(--ivory);
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      margin-bottom: 18px;
+    }
+
+    .section-header p {
+      color: var(--gray);
+      font-size: 1.08rem;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(198, 160, 90, 0.18);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: 0 18px 55px var(--shadow);
+    }
+
+    .card .number {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--rose-light);
+      color: var(--rose);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--gray);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .soft-panel {
+      background:
+        linear-gradient(135deg, rgba(243,222,217,0.85), rgba(255,255,255,0.58));
+      border: 1px solid rgba(198, 160, 90, 0.20);
+      border-radius: 34px;
+      padding: 42px;
+      box-shadow: 0 24px 70px var(--shadow);
+    }
+
+    .soft-panel h2 {
+      font-size: clamp(2rem, 3.5vw, 3.1rem);
+      margin-bottom: 20px;
+    }
+
+    .soft-panel p {
+      color: var(--gray);
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 34px;
+      color: var(--gray);
+    }
+
+    .check-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+      align-items: start;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(198, 160, 90, 0.18);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .step h3 {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .step p {
+      color: var(--gray);
+    }
+
+    .price-box {
+      background: var(--charcoal);
+      color: var(--white);
+      border-radius: 36px;
+      padding: 46px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(47,49,52,0.18);
+    }
+
+    .price-box::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background: rgba(198,160,90,0.22);
+      right: -80px;
+      top: -70px;
+    }
+
+    .price-box h2 {
+      color: var(--white);
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-box p {
+      color: rgba(255,255,255,0.78);
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 24px;
+      padding: 28px;
+    }
+
+    .price-card strong {
+      display: block;
+      font-size: 2.2rem;
+      color: var(--gold-soft);
+      margin-bottom: 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+    }
+
+    .price-card span {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .form-section {
+      background:
+        radial-gradient(circle at 80% 10%, rgba(201,130,122,0.18), transparent 30%),
+        var(--ivory-soft);
+    }
+
+    .form-card {
+      max-width: 780px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(198,160,90,0.22);
+      border-radius: 34px;
+      padding: 42px;
+      box-shadow: 0 24px 80px var(--shadow);
+    }
+
+    .form-card h2 {
+      text-align: center;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    .form-card .intro {
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      font-weight: 650;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(198,160,90,0.35);
+      background: var(--ivory-soft);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      color: var(--charcoal);
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(201,130,122,0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .submit-btn {
+      border: none;
+      cursor: pointer;
+      margin-top: 6px;
+      font-size: 1rem;
+    }
+
+    .legal {
+      margin-top: 18px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    .final-cta {
+      text-align: center;
+      padding: 78px 0;
+      background: var(--ivory);
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2.1rem, 4vw, 3.8rem);
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      color: var(--gray);
+      max-width: 680px;
+      margin: 0 auto 28px;
+      font-size: 1.12rem;
+    }
+
+    footer {
+      padding: 28px 0;
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .split,
+      .price-row,
+      .three-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      .hero-card {
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .top-bar-inner {
+        align-items: center;
+      }
+
+      .nav-cta {
+        padding: 10px 15px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .section {
+        padding: 62px 0;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero .hook {
+        font-size: 2rem;
+      }
+
+      .soft-panel,
+      .form-card,
+      .price-box {
+        padding: 28px;
+        border-radius: 26px;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="top-bar">
+      <div class="container top-bar-inner">
+        <div class="brand">VERANO KI</div>
+        <a href="#reserva" class="nav-cta">Quiero mi semana gratuita</a>
+      </div>
+    </header>
+
+    <main>
+
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">Reset femenino de verano</div>
+            <h1>VERANO KI</h1>
+            <div class="hook">Ligera, esbelta<br>y radiante</div>
+            <p class="subtitle">
+              Puesta a punto natural de 7 días para mujeres que quieren llegar al verano
+              con más ligereza, vitalidad, alegría y confianza en su cuerpo.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#reserva" class="btn-primary">Quiero mi semana gratuita</a>
+              <a href="#como-funciona" class="btn-secondary">Ver cómo funciona</a>
+            </div>
+
+            <div class="availability">
+              <span></span>
+              Semana inicial gratis · Solo 10 plazas
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <img src="verano-ki.png" alt="VERANO KI - Ligera, esbelta y radiante">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Vuelve a sentirte bien en tu cuerpo</h2>
+            <p>
+              VERANO KI está pensado para mujeres como tú que se sienten cansadas porque el trabajo y las ocupaciones consumen energía o bien quieren reconectarse con la vitalidad de su propio cuerpo, y desean iniciar un cambio sencillo, natural y atractivo antes del verano.
+            </p>
+          </div>
+
+          <div class="three-grid">
+            <div class="card">
+              <div class="number">1</div>
+              <h3>Ligereza</h3>
+              <p>
+                Para activar una sensación corporal más liviana, cómoda y amable en tu día a día.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="number">2</div>
+              <h3>Vitalidad</h3>
+              <p>
+                Para recuperar energía, ritmo y ganas de cuidarte con pequeños gestos sostenibles.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="number">3</div>
+              <h3>Confianza</h3>
+              <p>
+                Para llegar al verano con más alegría, presencia y una relación más luminosa con tu cuerpo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container split">
+          <div class="soft-panel">
+            <h2>¿Para quién es?</h2>
+            <p>
+              VERANO KI es para mujeres reales: mujeres con trabajo, cansancio acumulado,
+              cambios corporales, deseo de verse mejor y ganas de cuidarse desde un lugar amable.
+            </p>
+            <p>
+              Una experiencia pensada para empezar con claridad, motivación y acompañamiento.
+            </p>
+          </div>
+
+          <ul class="check-list">
+            <li>Te notas hinchada o pesada.</li>
+            <li>Sientes que tu energía diaria ha bajado.</li>
+            <li>Quieres prepararte para el verano con más confianza.</li>
+            <li>Buscas algo natural, sencillo y fácil de seguir.</li>
+            <li>Quieres sentirte más esbelta, vital y radiante.</li>
+            <li>Deseas cuidarte desde la alegría y el deseo de sentirte bien.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="como-funciona">
+        <div class="container">
+          <div class="section-header">
+            <h2>Cómo funciona VERANO KI</h2>
+            <p>
+              Una experiencia inicial de 7 días para conocer tu punto de partida,
+              activar hábitos sencillos y decidir libremente si quieres continuar.
+            </p>
+          </div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div>
+                <h3>Reservas tu plaza gratuita</h3>
+                <p>
+                  La semana inicial está disponible para las 10 primeras mujeres que quieran probar el método.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div>
+                <h3>Recibes tu Mapa de Vitalidad</h3>
+                <p>
+                  Valoramos tu energía, sensación corporal, hábitos, descanso y objetivos personales.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div>
+                <h3>Empiezas tu reset de 7 días</h3>
+                <p>
+                  Recibes pautas sencillas, una mini guía práctica y recomendaciones naturales para empezar.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">4</div>
+              <div>
+                <h3>Decides si continúas</h3>
+                <p>
+                  Después de la semana inicial puedes continuar por 49 € semanales, sin permanencia.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container">
+          <div class="price-box">
+            <h2>Una entrada sencilla para empezar</h2>
+            <p>
+              VERANO KI reduce la barrera de entrada: pruebas la experiencia durante una semana,
+              descubres tu Mapa de Vitalidad y decides con libertad cómo continuar.
+            </p>
+
+            <div class="price-row">
+              <div class="price-card">
+                <strong>Gratis</strong>
+                <span>Semana inicial para las 10 primeras mujeres.</span>
+              </div>
+
+              <div class="price-card">
+                <strong>49 €/semana</strong>
+                <span>Continuidad opcional, personalizada y sin permanencia.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Qué incluye la semana inicial</h2>
+            <p>
+              Una experiencia compacta y clara para empezar a activar ligereza,
+              vitalidad y conexión corporal desde el primer día.
+            </p>
+          </div>
+
+          <div class="three-grid">
+            <div class="card">
+              <div class="number">✦</div>
+              <h3>Mapa de Vitalidad</h3>
+              <p>
+                Una valoración inicial para conocer tu momento actual y orientar mejor tu proceso.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="number">✦</div>
+              <h3>Medición energética a distancia</h3>
+              <p>
+                Una lectura complementaria centrada en vitalidad, equilibrio y necesidades prioritarias.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="number">✦</div>
+              <h3>Mini ebook VERANO KI</h3>
+              <p>
+                Una guía práctica con pautas sencillas, hábitos de ligereza y gestos diarios de autocuidado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section form-section" id="reserva">
+        <div class="container">
+          <div class="form-card">
+            <h2>Reserva tu semana gratuita</h2>
+            <p class="intro">
+              Déjanos tus datos y te contactaremos para iniciar tu Mapa de Vitalidad.
+              Plazas iniciales limitadas a 10 mujeres.
+            </p>
+
+            <form action="#" method="post">
+              <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+              </div>
+
+              <div>
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+              </div>
+
+              <div>
+                <label for="telefono">Teléfono / WhatsApp</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu teléfono">
+              </div>
+
+              <div>
+                <label for="objetivo">¿Qué te gustaría mejorar este verano?</label>
+                <select id="objetivo" name="objetivo">
+                  <option value="">Elige una opción</option>
+                  <option value="ligereza">Sentirme más ligera</option>
+                  <option value="vitalidad">Recuperar vitalidad</option>
+                  <option value="confianza">Ganar confianza corporal</option>
+                  <option value="habitos">Activar hábitos de autocuidado</option>
+                  <option value="otro">Otro objetivo</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="mensaje">Cuéntanos brevemente tu punto de partida</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Por ejemplo: me siento hinchada, con poca energía, quiero llegar al verano sintiéndome mejor..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary submit-btn">Solicitar mi plaza gratuita</button>
+            </form>
+
+            <p class="legal">
+              VERANO KI es un programa de bienestar natural y acompañamiento complementario.
+              No sustituye diagnóstico, tratamiento médico ni seguimiento sanitario profesional.
+              Los resultados pueden variar según cada persona, sus hábitos y su situación individual.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="container">
+          <h2>Tu verano puede empezar desde dentro</h2>
+          <p>
+            Una semana para escuchar tu cuerpo, activar tu vitalidad y empezar a cuidarte
+            con más alegría, ligereza y confianza.
+          </p>
+          <a href="#reserva" class="btn-primary">Quiero mi semana gratuita</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="container">
+        © VERANO KI · Reset femenino de verano · Ligera, esbelta y radiante
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
